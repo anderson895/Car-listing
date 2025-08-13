@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <title>ConsultaJaime</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/static/css/output.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-gray-100 p-6">
+
+  <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold mb-4">Cars Management</h1>
+
+    <!-- Search -->
+    <input type="text" id="search" placeholder="Search cars..." 
+           class="border p-2 w-full mb-4 rounded">
+
+    <!-- Add Car Form -->
+    <form id="carForm" class="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+      <input type="hidden" id="car_id">
+      <input type="text" id="car_name" placeholder="Car Name" class="border p-2 rounded">
+      <input type="text" id="car_description" placeholder="Description" class="border p-2 rounded">
+      
+      <!-- Category Selection -->
+      <select id="car_category" class="border p-2 rounded">
+          <option value="">Select Category</option>
+          <option value="SUV">SUV</option>
+          <option value="Sedan">Sedan</option>
+          <option value="Truck">Truck</option>
+          <option value="Sports Car">Sports Car</option>
+          <option value="Electric">Electric</option>
+      </select>
+
+      <input type="text" id="car_image" placeholder="Image URL" class="border p-2 rounded">
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 col-span-1 md:col-span-4">
+        Save Car
+      </button>
+    </form>
+
+    <!-- Cars Cards -->
+    <div id="carsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
