@@ -1,18 +1,16 @@
 $(document).ready(function () {
-  loadCars();
+  loadCars(); // load all cars initially
 
   // Load Cars
-  function loadCars(search = "", showLoading = true) {
-    if (showLoading) {
-      Swal.fire({
-        title: "Loading cars...",
-        html: "Please wait while we fetch the data.",
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading();
-        }
-      });
-    }
+  function loadCars(search = "") {
+    Swal.fire({
+      title: "Loading cars...",
+      html: "Please wait while we fetch the data.",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
 
     $.get("/cars", function (data) {
       let cards = "";
@@ -43,15 +41,22 @@ $(document).ready(function () {
         });
 
       $("#carsContainer").html(cards);
-      if (showLoading) Swal.close(); // Close loading modal
+      Swal.close(); // Close loading modal
     }).fail(function () {
       Swal.fire("Error", "Unable to load cars.", "error");
     });
   }
 
-  // Search (no loading alert)
-  $("#search").on("keyup", function () {
-    loadCars($(this).val(), false); // false = walang loading alert
+  // Search only when clicking the button or pressing enter
+  $("#searchBtn").on("click", function () {
+    let searchValue = $("#search").val();
+    loadCars(searchValue);
+  });
+
+  $("#searchForm").on("submit", function (e) {
+    e.preventDefault();
+    let searchValue = $("#search").val();
+    loadCars(searchValue);
   });
 
   // Save Car (Add/Update)
