@@ -2,15 +2,17 @@ $(document).ready(function () {
   loadCars();
 
   // Load Cars
-  function loadCars(search = "") {
-    Swal.fire({
-      title: "Loading cars...",
-      html: "Please wait while we fetch the data.",
-      allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading();
-      }
-    });
+  function loadCars(search = "", showLoading = true) {
+    if (showLoading) {
+      Swal.fire({
+        title: "Loading cars...",
+        html: "Please wait while we fetch the data.",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
+    }
 
     $.get("/cars", function (data) {
       let cards = "";
@@ -41,15 +43,15 @@ $(document).ready(function () {
         });
 
       $("#carsContainer").html(cards);
-      Swal.close(); // Close loading modal
+      if (showLoading) Swal.close(); // Close loading modal
     }).fail(function () {
       Swal.fire("Error", "Unable to load cars.", "error");
     });
   }
 
-  // Search
+  // Search (no loading alert)
   $("#search").on("keyup", function () {
-    loadCars($(this).val());
+    loadCars($(this).val(), false); // false = walang loading alert
   });
 
   // Save Car (Add/Update)
