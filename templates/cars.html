@@ -2,30 +2,31 @@
 <html>
 <head>
     <title>ConsultaJaime</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/static/css/output.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/css/output.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body class="bg-gray-100 p-6">
+<body class="bg-gray-100 p-4 sm:p-6">
 
-<div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-    <h1 class="text-2xl font-bold mb-4">Cars Management</h1>
+<div class="max-w-6xl mx-auto bg-white p-4 sm:p-6 rounded-lg shadow-lg">
+    <h1 class="text-xl sm:text-2xl font-bold mb-4 text-center sm:text-left">Cars Management</h1>
 
     <!-- Search -->
-    <form id="searchForm" class="flex gap-2 mb-4">
+    <form id="searchForm" class="flex flex-col sm:flex-row gap-2 mb-4">
         <input type="text" id="search" placeholder="Search cars..."
-               class="border p-2 flex-1 rounded">
+               class="border p-2 rounded flex-1">
         <button type="submit" id="searchBtn"
-                class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 w-full sm:w-auto">
             Search
         </button>
     </form>
 
     <!-- Add Car Form -->
-    <form id="carForm" class="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+    <form id="carForm" class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <input type="hidden" id="car_id">
+
         <input type="text" id="car_name" placeholder="Car Name" class="border p-2 rounded">
         <input type="text" id="car_description" placeholder="Description" class="border p-2 rounded">
 
@@ -40,15 +41,17 @@
         </select>
 
         <input type="text" id="car_image" placeholder="Image URL" class="border p-2 rounded">
+
         <button type="submit"
-                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 col-span-1 md:col-span-4">
+                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 col-span-1 md:col-span-4 w-full">
             Save Car
         </button>
     </form>
 
     <!-- Cars Cards -->
-    <div id="carsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+    <div id="carsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6"></div>
 </div>
-  <script src="/static/js/app.js"></script>
+
+<script src="/static/js/app.js"></script>
 </body>
 </html>
