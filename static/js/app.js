@@ -32,11 +32,13 @@ $(document).ready(function () {
                   <p class="text-gray-600 text-sm">${car.car_description}</p>
                   <span class="inline-block bg-gray-200 text-gray-700 px-2 py-1 rounded text-xs mt-2">${car.car_category}</span>
                   <div class="mt-4 flex gap-2">
-                    <button class="bg-yellow-500 text-white px-3 py-1 rounded text-sm editBtn" data-id="${car.car_id}">Edit</button>
-                    <button class="bg-red-500 text-white px-3 py-1 rounded text-sm deleteBtn" data-id="${car.car_id}">Delete</button>
+                    <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm editBtn cursor-pointer" data-id="${car.car_id}">Edit</button>
+                    <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm deleteBtn cursor-pointer" data-id="${car.car_id}">Delete</button>
+
                   </div>
               </div>
             </div>
+
           `;
         });
 
@@ -123,14 +125,29 @@ $(document).ready(function () {
   // Edit Car
   $(document).on("click", ".editBtn", function () {
     let id = $(this).data("id");
+
+    Swal.fire({
+      title: "Loading car details...",
+      html: "Please wait while we fetch the car info.",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
+
     $.get(`/cars/${id}`, function (car) {
       $("#car_id").val(car.car_id);
       $("#car_name").val(car.car_name);
       $("#car_description").val(car.car_description);
       $("#car_category").val(car.car_category);
       $("#car_image").val(car.car_image);
+
+      Swal.close(); // sarado loading once data is loaded
+    }).fail(function () {
+      Swal.fire("Error", "Unable to load car details.", "error");
     });
   });
+
 
   // Delete Car
   $(document).on("click", ".deleteBtn", function () {
